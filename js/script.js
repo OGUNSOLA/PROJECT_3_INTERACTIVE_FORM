@@ -9,10 +9,7 @@ const activityCost = document.getElementById('activities-cost');
 let costDisplayed = document.getElementById('activities-cost').textContent;
 let totalCost = 0;
 const checkbox = document.querySelectorAll('.checkbox');
-
-
-
-
+const activitySet = document.getElementById('activities');
 
 // variables for dispolaying or hiding payment method 
 const creditCardDiv = document.getElementById('credit-card');
@@ -26,10 +23,6 @@ const payPal = payment[2];
 const bitcoin = payment[3];
 
 
-
-
-
-
 // variables for form validation
 const name = document.getElementById('name');
 const email = document.getElementById('email');
@@ -40,10 +33,6 @@ const form = document.getElementsByTagName('form')[0];
 const mainEvent = document.querySelector('[name^=all]');
 const numberBox = document.getElementsByClassName('num-box')[0];
 const zip = document.getElementById('zip');
-
-
-
-
 
 
 // focuses on the name field on windows load
@@ -246,6 +235,13 @@ function testEmail(suppliedEmail) {
 
 function testCreditCard(cardNumber) {
     let regex = /^\d{13,16}$/;
+    document.getElementById('cc-hint').textContent = "Credit card number must be between 13 - 16 digits";
+    if (cardNumber.length < 13) {
+        document.getElementById('cc-hint').textContent = "The number supplied is less than 13!";
+    }
+    else if (cardNumber.length > 16) {
+        document.getElementById('cc-hint').textContent = "The number supplied is greater than 16!";
+    }
     return regex.test(cardNumber);
 }
 
@@ -284,7 +280,7 @@ email.addEventListener('focusin', (e) => {
 
 // FORM VALIDATION FOR ACTIVITY FIIELD ON LOSS OF FOCUS
 activity.addEventListener('focusout', (e) => {
-    toTEstActivity(e);
+    toTestActiivity(e);
 });
 
 // REMOVE THE WARNING FOR  ACTIVITY FIIELD WHEN FIELD IS IN FOCUS
@@ -323,3 +319,32 @@ cvv.addEventListener('focusin', (e) => {
     cvv.parentElement.classList.remove("not-valid");
     document.getElementById('cvv-hint').style.display = 'none';
 });
+
+//PREVENTING CONFLICTING ACTIVITIES FROM BEING SELECTED 
+activitySet.addEventListener('change', (e) => {
+    const selected = e.target;
+
+    const eventTime = selected.getAttribute('data-day-and-time');
+    for (let i = 0; i < checkbox.length; i++) {
+        if (selected.checked) {
+            if (eventTime === checkbox[i].getAttribute('data-day-and-time') && selected !== checkbox[i]) {
+                checkbox[i].disabled = true;
+                checkbox[i].parentElement.classList.add('disabled');
+            }
+        }else {
+            checkbox[i].disabled = false;
+            checkbox[i].parentElement.classList.remove('disabled');
+        }
+    }
+});
+
+
+for (let i = 0; i < checkbox.length; i++) {
+    checkbox[i].addEventListener('focusin', (e) => {
+      checkbox[i].parentElement.classList.add('focus');
+    });
+
+    checkbox[i].addEventListener('focusout', (e) => {
+      checkbox[i].parentElement.classList.remove('focus');
+    });
+  }
