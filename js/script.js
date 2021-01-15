@@ -45,6 +45,7 @@ window.addEventListener('load', () => {
     creditCard.selected = 'true';
 });
 
+// SHOWS OR HIDE THE OTHER JOB ROLE 
 jobRole.addEventListener('change', (e) => {
     const job = e.target.value;
     if (job === 'other') {
@@ -55,6 +56,7 @@ jobRole.addEventListener('change', (e) => {
     }
 });
 
+// DISPLAYS COLORS BASED ON THEME SELECTED 
 design.addEventListener('change', (e) => {
     color.disabled = false;
     for (let i = 0; i < shirtColors.length; i++) {
@@ -86,7 +88,7 @@ design.addEventListener('change', (e) => {
 });
 
 
-
+// SUMS UP COST OF THE I=EVENT BASED ON ACTIVITY SELECTED 
 activity.addEventListener('change', (e) => {
     if (e.target.type === 'checkbox') {
         if (e.target.checked) {
@@ -95,9 +97,7 @@ activity.addEventListener('change', (e) => {
         else {
             totalCost -= parseInt(e.target.getAttribute('data-cost'));
         }
-
     }
-
     activityCost.innerHTML = `Total: $${totalCost}`
 
 });
@@ -233,6 +233,7 @@ function testEmail(suppliedEmail) {
     return regex.test(suppliedEmail);
 }
 
+// REGEX VALIDATION FOR CREDIT CARD
 function testCreditCard(cardNumber) {
     let regex = /^\d{13,16}$/;
     document.getElementById('cc-hint').textContent = "Credit card number must be between 13 - 16 digits";
@@ -338,6 +339,7 @@ activitySet.addEventListener('change', (e) => {
     }
 });
 
+// HANDLES FOCUS IN AND OUT OF THE ACTIVITY SECTIION 
 
 for (let i = 0; i < checkbox.length; i++) {
     checkbox[i].addEventListener('focusin', (e) => {
