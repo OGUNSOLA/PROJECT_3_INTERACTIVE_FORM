@@ -136,7 +136,7 @@ function validate(e) {
     toTestName(e);
     toTestEmail(e);
     toTestActiivity(e);
-    if (creditCard.selected) {
+    if (creditCard.selectedIndex.value === 1) {
         toTestCreditCard(e);
     }
     toTestZipCode(e);
@@ -223,7 +223,7 @@ function toTestCvv(e) {
 
 // function to test the name 
 function testName(suppliedName) {
-    let regex = /^\s*\w+\s+\w+\s*\w*\s*$/; // ensures first name and surname is filled , other name optional
+    let regex = /^\s*\w+\s*\w*\s*\w*\s*$/; // ensures first name and surname is filled , other name optional
     return regex.test(suppliedName);
 }
 
