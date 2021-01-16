@@ -136,13 +136,11 @@ function validate(e) {
     toTestName(e);
     toTestEmail(e);
     toTestActiivity(e);
-    if (creditCard.selectedIndex.value === 1) {
+    if (creditCard.selected) {
         toTestCreditCard(e);
+        toTestZipCode(e);
+        toTestCvv(e);
     }
-    toTestZipCode(e);
-    toTestCvv(e);
-
-
 }
 
 //     // NAME VALIDATION
